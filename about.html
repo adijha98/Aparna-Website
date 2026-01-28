@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Aparna Enterprises</title>
+  <meta name="description" content="Learn more about Aparna Enterprises – a trusted courier and logistics partner delivering reliability across India." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,sans-serif;background:#fafafa;padding-top:70px}
+
+    /* HEADER (same as main site) */
+    header{
+      position:fixed;top:0;left:0;width:100%;z-index:100;
+      padding:10px 32px;
+      background:#ff6a00;
+      box-shadow:0 10px 30px rgba(0,0,0,.25)
+    }
+    nav{display:flex;justify-content:space-between;align-items:center}
+    nav a{color:#fff;margin-left:18px;text-decoration:none;font-weight:600}
+    .logo{height:34px}
+
+    /* HERO */
+    .about-hero{
+      height:60vh;
+      background:linear-gradient(135deg,rgba(0,0,0,.65),rgba(255,106,0,.65)),
+                 url('Gemini_Generated_Image_z4xq8pz4xq8pz4xq.png') center/cover no-repeat;
+      display:flex;align-items:center;justify-content:center;
+      text-align:center;color:#fff
+    }
+    .about-hero h1{font-size:44px;margin-bottom:12px}
+    .about-hero p{font-size:18px;max-width:720px}
+
+    /* SECTIONS */
+    .section{padding:90px 40px}
+    .container{max-width:1100px;margin:auto}
+    h2{text-align:center;font-size:36px;margin-bottom:40px}
+    p{font-size:16px;line-height:1.8;color:#333}
+
+    /* ABOUT GRID */
+    .about-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:50px;
+      align-items:center
+    }
+   /* ABOUT US – PREMIUM HOVER EFFECT */
+.about-box{
+  background:#fff;
+  padding:40px;
+  border-radius:24px;
+  box-shadow:0 20px 45px rgba(0,0,0,.12);
+  transition:transform .45s ease, box-shadow .45s ease, background .45s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.about-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(255,106,0,.15),rgba(255,153,60,.15));
+  opacity:0;
+  transition:.45s;
+}
+
+.about-box:hover{
+  transform:translateY(-12px) scale(1.02);
+  box-shadow:0 35px 70px rgba(255,106,0,.35);
+}
+
+.about-box:hover::before{
+  opacity:1;
+}
+
+
+    /* VALUES */
+    .values{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:30px
+    }
+    .value-card{
+      background:#fafafa;
+      padding:32px;
+      border-radius:20px;
+      text-align:center;
+      box-shadow:0 15px 35px rgba(0,0,0,.1);
+      transition:.4s
+    }
+    .value-card:hover{
+      transform:translateY(-10px);
+      background:linear-gradient(135deg,#ff6a00,#ff8533);
+      color:#fff
+    }
+
+    /* STATS */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:30px;
+      text-align:center
+    }
+    .stat strong{font-size:34px;color:#ff6a00}
+
+    footer{background:#222;color:#fff;padding:40px;text-align:center}
+
+    @media(max-width:900px){
+      .about-grid{grid-template-columns:1fr}
+      .about-hero h1{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <img src="Screenshot 2023-10-09 121924.png" class="logo">
+    <div>
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#quote">Get Quote</a>
+    </div>
+  </nav>
+</header>
+
+<section class="about-hero">
+  <div>
+    <h1>About Aparna Enterprises</h1>
+    <p>Your trusted courier & logistics partner, delivering reliability, speed, and peace of mind across India.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container about-grid">
+    <div class="about-box">
+      <h2>Who We Are</h2>
+      <p>
+        Aparna Enterprises is a professionally managed courier and logistics company based in Noida,
+        committed to providing reliable, timely, and cost-effective delivery solutions.
+        With years of industry experience, we specialize in surface, air, time-bound,
+        international, and bulk shipment services for businesses and individuals.
+      </p>
+      <p>
+        Our focus is simple: <strong>deliver every shipment safely, on time, and with complete transparency.</strong>
+      </p>
+    </div>
+
+    <div class="about-box">
+      <h2>What We Do</h2>
+      <p>
+        We connect businesses with customers through a strong logistics network,
+        offering pan-India coverage and international reach. From documents to
+        large-volume cargo, we handle shipments with care and accountability.
+      </p>
+      <p>
+        By partnering with leading courier networks, we ensure seamless tracking,
+        secure handling, and dependable delivery timelines.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <h2>Our Core Values</h2>
+    <div class="values">
+      <div class="value-card"><h3>Reliability</h3><p>Consistent and dependable delivery services.</p></div>
+      <div class="value-card"><h3>Transparency</h3><p>Real-time tracking and honest communication.</p></div>
+      <div class="value-card"><h3>Speed</h3><p>Optimized routes for faster deliveries.</p></div>
+      <div class="value-card"><h3>Customer Focus</h3><p>Solutions tailored to client needs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Our Journey in Numbers</h2>
+    <div class="stats">
+      <div class="stat"><strong>10+</strong><p>Years of Experience</p></div>
+      <div class="stat"><strong>10,000+</strong><p>Shipments Delivered</p></div>
+      <div class="stat"><strong>500+</strong><p>Business Clients</p></div>
+      <div class="stat"><strong>Pan-India</strong><p>Delivery Network</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Noida | 📞 9999999999</p>
+  <p>© 2026 Aparna Enterprises</p>
+</footer>
+
+</body>
+</html>

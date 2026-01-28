@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Shipment | Aparna Enterprises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      margin: 0; 
+      font-family: 'Poppins', sans-serif; 
+      background: #fafafa; 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+    }
+    header { 
+      background: #ff6a00; 
+      padding: 15px 32px; 
+      color: white; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .logo { height: 34px; cursor: pointer; }
+    .container { 
+      flex: 1; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      padding: 20px; 
+      background: linear-gradient(rgba(255,106,0,0.05), rgba(255,255,255,0)), url('Gemini_Generated_Image_z4xq8pz4xq8pz4xq.png') center/cover;
+    }
+    .track-box { 
+      background: white; 
+      padding: 40px; 
+      border-radius: 24px; 
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+      width: 100%; 
+      max-width: 450px; 
+      text-align: center;
+      border-top: 5px solid #ff6a00;
+    }
+    h2 { color: #222; margin-bottom: 10px; font-size: 28px; }
+    p.subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+    
+    label { display: block; text-align: left; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 8px; margin-left: 5px; }
+    select, input { 
+      width: 100%; 
+      padding: 14px; 
+      margin-bottom: 20px; 
+      border: 1px solid #ddd; 
+      border-radius: 12px; 
+      font-family: inherit; 
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    select:focus, input:focus { border-color: #ff6a00; outline: none; box-shadow: 0 0 0 3px rgba(255,106,0,0.1); }
+
+    button { 
+      width: 100%; 
+      padding: 16px; 
+      background: #ff6a00; 
+      color: white; 
+      border: none; 
+      border-radius: 30px; 
+      font-weight: 600; 
+      font-size: 16px;
+      cursor: pointer; 
+      transition: 0.3s; 
+      box-shadow: 0 10px 20px rgba(255,106,0,0.3);
+    }
+    button:hover { background: #e65f00; transform: translateY(-2px); box-shadow: 0 15px 25px rgba(255,106,0,0.4); }
+    
+    .support-link { font-size: 13px; color: #888; margin-top: 25px; }
+    .support-link a { color: #ff6a00; text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="Screenshot 2023-10-09 121924.png" class="logo" onclick="location.href='index.html'">
+  <nav>
+    <a href="index.html" style="color:white; text-decoration:none; font-weight:600; font-size: 14px;">Back to Home</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="track-box">
+    <h2>Track Shipment</h2>
+    <p class="subtitle">Enter your tracking details below to get real-time updates on your cargo.</p>
+    
+    <label>Courier Partner</label>
+    <select id="carrier">
+      <option value="">-- Select Provider --</option>
+      <option value="trackon">Trackon (Direct)</option>
+      <option value="bluedart">Blue Dart</option>
+      <option value="delhivery">Delhivery</option>
+      <option value="xpressbees">Xpressbees</option>
+      <option value="dtdc">DTDC</option>
+      <option value="fedex">FedEx</option>
+      <option value="dhl">DHL Express</option>
+      <option value="aramex">Aramex</option>
+    </select>
+
+    <label>Tracking Number / AWB</label>
+    <input type="text" id="trackingID" placeholder="e.g. 1234567890">
+
+    <button onclick="redirectTracking()">Track Now</button>
+    
+    <div class="support-link">
+      Having trouble? <a href="index.html#quote">Contact Support</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function redirectTracking() {
+    const carrier = document.getElementById('carrier').value;
+    const id = document.getElementById('trackingID').value.trim();
+
+    if (!carrier) {
+      alert("Please select a courier partner.");
+      return;
+    }
+    if (!id) {
+      alert("Please enter a valid tracking number.");
+      return;
+    }
+
+    let url = "";
+    
+    // Logic for all requested partners
+    switch(carrier) {
+      case "trackon":
+        url = `https://www.trackon.in/courier-tracking/TrackingResult?No=${id}`;
+        break;
+      case "xpressbees":
+        url = `https://www.xpressbees.com/track?shipment_id=${id}`;
+        break;
+      case "dhl":
+        url = `https://www.dhl.com/in-en/home/tracking/tracking-main.html?tracking-id=${id}`;
+        break;
+      case "fedex":
+        url = `https://www.fedex.com/fedextrack/?trknbr=${id}`;
+        break;
+      case "aramex":
+        url = `https://www.aramex.com/in/en/track/results?mode=0&ShipmentNumber=${id}`;
+        break;
+      case "bluedart":
+        url = `https://www.bluedart.com/tracking?handler=tnt&numbers=${id}`;
+        break;
+      case "delhivery":
+        url = `https://www.delhivery.com/track/package/${id}`;
+        break;
+      case "dtdc":
+        url = `https://www.dtdc.in/tracking/tracking_results.asp?SearchType=T&TicketNo=${id}`;
+        break;
+ 
+    }
+
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
+</script>
+
+</body>
+</html>

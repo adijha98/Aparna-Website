@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Aparna Enterprises</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Poppins', sans-serif; background: #fafafa; overflow-x: hidden; scroll-behavior: smooth; }
+    
+    /* NAVIGATION */
+    header { background: #ff6a00; padding: 15px 32px; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
+    nav a { color: #fff; text-decoration: none; font-weight: 600; margin-left: 20px; }
+    .logo { height: 34px; }
+
+    /* EXPRESSIVE HERO SECTION */
+    .hero-small { 
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Gemini_Generated_Image_z4xq8pz4xq8pz4xq.png') center/cover; 
+      padding: 150px 20px 80px; 
+      text-align: center; 
+      color: #fff; 
+    }
+    .hero-small h1 { 
+      font-size: 48px; 
+      margin-bottom: 10px; 
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #fff, #ff9a3c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+    }
+    .hero-small .underline {
+      width: 100px;
+      height: 4px;
+      background: #ff6a00;
+      margin: 10px auto 20px;
+      border-radius: 2px;
+    }
+
+    /* CONTAINER & ZIG-ZAG LAYOUT */
+    .container { max-width: 1100px; margin: 60px auto; padding: 20px; }
+
+    .service-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 120px;
+      gap: 60px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
+      padding: 40px;
+      border-radius: 30px;
+    }
+
+    /* REVEAL ON SCROLL */
+    .service-row.reveal { opacity: 1; transform: translateY(0); }
+
+    /* ZIG-ZAG LOGIC */
+    .service-row:nth-child(even) { flex-direction: row-reverse; }
+
+    /* HOVER GLOW & POP */
+    .service-row:hover {
+      background: #fff;
+      transform: scale(1.03) translateY(-10px) !important;
+      box-shadow: 0 30px 60px rgba(255, 106, 0, 0.15), 0 0 30px rgba(255, 106, 0, 0.05);
+    }
+
+    .service-image { flex: 1.2; }
+    .service-image img { 
+      width: 100%; 
+      border-radius: 24px; 
+      box-shadow: 0 15px 45px rgba(0,0,0,0.12); 
+      transition: 0.4s;
+    }
+    .service-row:hover .service-image img { transform: scale(1.02); }
+    
+    .service-text { flex: 1; }
+    .service-text h2 { color: #ff6a00; font-size: 34px; margin-bottom: 20px; font-weight: 700; }
+    .service-text p { color: #444; line-height: 1.9; font-size: 17px; }
+
+    footer { background: #222; color: #fff; padding: 50px; text-align: center; }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 900px) {
+      .service-row, .service-row:nth-child(even) { flex-direction: column !important; text-align: center; gap: 30px; padding: 20px; }
+      .hero-small h1 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html"><img src="Screenshot 2023-10-09 121924.png" class="logo"></a>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="index.html#quote">Get Quote</a>
+    </div>
+  </nav>
+</header>
+
+<div class="hero-small">
+  <h1>Premium Logistics Solutions</h1>
+  <div class="underline"></div>
+  <p style="font-size: 20px; font-weight: 300; opacity: 0.9;">Excellence in Motion • Global Reach • Local Expertise</p>
+</div>
+
+<div class="container">
+  <div class="service-row">
+    <div class="service-image">
+      <img src="Gemini_Generated_Image_66vjpw66vjpw66vj.png" alt="Surface Courier">
+    </div>
+    <div class="service-text">
+      <h2>Surface Courier</h2>
+      <p>Our Surface Courier service offers a cost-effective and highly reliable road transport network across India. We specialize in handling both small parcels and heavy cargo with equal precision, ensuring your goods travel through safe, optimized routes. With a vast fleet and experienced logistics partners, we guarantee door-to-door delivery that meets your budget without compromising on safety. Perfect for businesses looking for consistent shipping.</p>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-image">
+      <img src="Gemini_Generated_Image_587dyo587dyo587d.png" alt="Air Courier">
+    </div>
+    <div class="service-text">
+      <h2>Air Courier</h2>
+      <p>When time is of the essence, our Air Courier service provides the fastest possible transit for your urgent documents and packages. We utilize major commercial and cargo flight networks to bridge distances across the country in hours, not days. This premium service includes prioritized handling and accelerated clearance. It is the ideal choice for high-value items, urgent corporate documents, and time-sensitive shipments that cannot wait.</p>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-image">
+      <img src="Gemini_Generated_Image_sigsrgsigsrgsigs.png" alt="Time-Bound Delivery">
+    </div>
+    <div class="service-text">
+      <h2>Time-Bound Delivery</h2>
+      <p>Our Time-Bound service is engineered for shipments that have a strict deadline. Whether it’s a critical medical supply, a legal contract, or a last-minute industrial spare part, we provide guaranteed delivery windows tailored to your requirements. We monitor these shipments with 24/7 "active tracking" to ensure every milestone is met on time. Our commitment to punctuality helps your business maintain its professional reputation.</p>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-image">
+      <img src="Gemini_Generated_Image_d44v45d44v45d44v.png" alt="International Delivery">
+    </div>
+    <div class="service-text">
+      <h2>International Delivery</h2>
+      <p>Expand your reach globally with our seamless International Delivery services. We partner with world-class carriers to provide reliable shipping to over 200 countries. From handling complex customs documentation to providing end-to-end tracking, we take the stress out of global logistics. Whether you are shipping commercial samples or personal gifts, we ensure your global shipments arrive safely and professionally.</p>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-image">
+      <img src="Gemini_Generated_Image_b76rb0b76rb0b76r.png" alt="Bulk Shipments">
+    </div>
+    <div class="service-text">
+      <h2>Bulk Shipments</h2>
+      <p>Designed for businesses with high-volume needs, our Bulk Shipment service offers heavy-duty logistics at highly competitive rates. We provide customized solutions for B2B distributions, large inventory moves, and palletized cargo. Our team manages the entire process with dedicated account support, ensuring that large-scale operations run smoothly. This is the choice for MSMEs and corporate clients looking for a scalable logistics partner.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Aparna Enterprises | Reliable Logistics Partners</p>
+</footer>
+
+<script>
+  // PREMIUM SCROLL REVEAL
+  const revealRows = document.querySelectorAll('.service-row');
+  const scrollReveal = () => {
+    revealRows.forEach(row => {
+      const rect = row.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.88){
+        row.classList.add('reveal');
+      }
+    });
+  };
+  window.addEventListener('scroll', scrollReveal);
+  window.addEventListener('load', scrollReveal);
+</script>
+
+</body>
+</html>
