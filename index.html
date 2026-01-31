@@ -24,6 +24,18 @@
     nav a{color:#fff;margin-left:18px;text-decoration:none;font-weight:600}
     .logo{height:34px}
 
+/* --- DYNAMIC HEADER ON SCROLL --- */
+    header.scrolled {
+      background: #ff6a00 !important; /* Keeps the brand color */
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2); /* Adds a professional shadow */
+      padding: 8px 32px; /* Shrinks the header slightly for a sleek look */
+    }
+
+    header.scrolled .logo {
+      height: 28px; /* Slightly smaller logo on scroll */
+      transition: 0.3s;
+    }
+
     /* HERO */
     .hero{
       height:90vh;
@@ -166,6 +178,25 @@ h2::after{
     .service-title{font-size:22px;font-weight:700;margin-bottom:8px}
     .service-desc{font-size:14px}
 
+/* --- STEP 1: MICRO-INTERACTION (BOUNCE) --- */
+    
+    /* 1. Define the movement */
+    @keyframes iconBounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    /* 2. Apply it to the icon when the card is hovered */
+    .service-selection-grid .service-card:hover .icon {
+      animation: iconBounce 0.5s ease infinite alternate;
+      display: inline-block;
+    }
+
+    /* 3. Smooth transition for the whole card */
+    .service-card {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
     /* WHY US */
     .why-grid{
       max-width:1100px;margin:auto;
@@ -184,9 +215,120 @@ h2::after{
       transform: translateY(-10px); 
       background: linear-gradient(135deg, #ff6a00, #ff8533); 
       color: #fff; 
-      /* This creates the glowing effect */
       box-shadow: 0 0 30px rgba(255, 106, 0, 0.6), 0 0 60px rgba(255, 106, 0, 0.2); 
-    }    /* PARTNERS */
+    }
+
+    /* 1. Define the floating movement */
+    @keyframes floatIcon {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* 2. Apply it to the icon/emoji inside the card */
+    .why-card div[style*="font-size"] {
+      display: inline-block;
+      animation: floatIcon 3s ease-in-out infinite;
+      transition: all 0.3s ease;
+    }
+
+    /* 3. Subtle tweak: Make icon slightly larger on card hover */
+    .why-card:hover div[style*="font-size"] {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+    }
+
+    /* --- FIXED OPTION 1: FLOATING LABELS --- */
+.quote-box input {
+  width: 100%;
+  padding: 16px 14px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 2px solid #eee;
+  background: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Ensure the text starts below the floating area */
+.quote-box input:focus {
+  border-color: #ff6a00;
+  outline: none;
+}
+
+/* FIX: This moves the label HIGHER so it doesn't hit the border */
+.quote-box input:focus::placeholder {
+  transform: translateY(-32px) scale(0.85); /* Increased from -24px to -32px */
+  color: #ff6a00;
+  font-weight: 600;
+  background-color: #fff; /* Matches background to "cut" through the border */
+  padding: 0 5px; /* Adds space around the text */
+  display: inline-block;
+  opacity: 1;
+}
+
+/* This keeps the label visible and high if there is text inside */
+.quote-box input:not(:placeholder-shown)::placeholder {
+  opacity: 0; /* Standard behavior to hide placeholder when typing */
+}
+     
+
+    /* --- STEP 2: SERVICE SELECTION GRID FIX --- */
+    .service-selection-grid {
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 15px;
+      width: 100%;
+      margin: 20px 0;
+      justify-content: center;
+    }
+
+    /* This forces the selection cards to be small tiles, not giant blocks */
+    .service-selection-grid .service-card {
+      flex: 1 !important;
+      height: auto !important; /* Overrides the 360px height */
+      max-width: 220px;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* Removes the orange growing bar from selection cards specifically */
+    .service-selection-grid .service-card::before {
+      display: none !important;
+    }
+
+    .service-selection-grid .service-card.active {
+      border-color: #ff6a00;
+      background: rgba(255, 106, 0, 0.05);
+      transform: translateY(-3px) !important;
+    }
+
+    .service-selection-grid .icon {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .service-selection-grid .badge {
+      position: absolute; top: -10px; right: -5px; background: #ff6a00;
+      color: white; font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: bold;
+    }   
+
+    /* Mobile Fix */
+    @media (max-width: 480px) {
+      .service-selection-grid { flex-direction: column; }
+      .service-selection-grid .service-card { max-width: 100%; }
+    }
+
+    /* PARTNERS */
+ 
+        /* PARTNERS */
     .partners-marquee{overflow:hidden}
     .partners-track{display:flex;animation:scroll 25s linear infinite}
     .partners-track img{height:70px;margin:0 40px}
@@ -199,7 +341,25 @@ h2::after{
       box-shadow:0 20px 45px rgba(0,0,0,.15)
     }
     .quote-box input{width:100%;padding:14px;margin-bottom:16px;border-radius:12px;border:1px solid #ddd}
-    .quote-box button{width:100%;padding:14px;border:none;border-radius:30px;background:#ff6a00;color:#fff;font-weight:600}
+    
+    .quote-box button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px; /* Changed from 30px to 12px to match inputs */
+      background: #ff6a00;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .quote-box button:hover {
+      background: #e65f00;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(255, 106, 0, 0.3);
+    }
 
     footer{
   background:#222;
@@ -207,6 +367,102 @@ h2::after{
   padding:50px 30px;
   text-align:center;
 }
+
+/* --- UPDATED FOOTER ALIGNMENT --- */
+.main-footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 60px 20px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* This creates the perfect alignment */
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-heading {
+  color: #ff6a00;
+  font-size: 18px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  position: relative;
+}
+
+/* Subtle line under headings */
+.footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 30px;
+  height: 2px;
+  background: #ff6a00;
+}
+
+.footer-text {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #ff6a00;
+  opacity: 1;
+  padding-left: 8px; /* Smooth movement on hover */
+}
+
+.footer-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 40px 0 20px;
+}
+
+.copyright-text {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+/* Responsive Fix for Mobile */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-heading::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}labe
 
 /* SCROLL REVEAL BASE */
 .section, .service-card, .why-card, .trust-bar{
@@ -250,6 +506,103 @@ h2::after{
   outline:none;
 }
 
+/* --- SMART WEIGHT TOOLTIP STYLING --- */
+.tooltip-icon {
+  cursor: help;
+  font-size: 11px;
+  background: #eee;
+  color: #666;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.tooltip-icon:hover {
+  background: #ff6a00;
+  color: #fff;
+  border-color: #ff6a00;
+}
+
+/* --- PAN-INDIA CLEAN DESIGN --- */
+.pan-india-clean {
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.pan-india-title {
+  font-size: 2.2rem;
+  color: #222;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Matching the "Why Us" orange dash */
+.orange-dash {
+  width: 60px;
+  height: 4px;
+  background: #ff6a00;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.stats-horizontal-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee; /* Looks like a Trust Bar */
+}
+
+.stat-unit {
+  text-align: center;
+}
+
+.stat-unit .counter {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ff6a00; /* Clean dark text like trust bar */
+  display: block;
+}
+
+.stat-unit .counter::after {
+  content: "+";
+  color: #ff6a00; /* Subtle orange accent on the plus */
+}
+
+.stat-unit p {
+  font-size: 0.9rem;
+  color: #180501;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* Mobile responsive - stacks vertically on small screens */
+@media (max-width: 768px) {
+  .stats-horizontal-bar {
+    flex-direction: column;
+    gap: 40px;
+    border: none;
+  }
+  .pan-india-title { font-size: 1.8rem; }
+}
+
   </style>
 </head>
 <body>
@@ -277,10 +630,25 @@ h2::after{
 
 <section class="trust-bar">
   <div class="trust-container">
-    <div class="trust-item"><strong>10+ Years</strong><div>Experience</div></div>
-    <div class="trust-item"><strong>10,000+</strong><div>Shipments</div></div>
-    <div class="trust-item"><strong>Pan‑India</strong><div>Network</div></div>
-    <div class="trust-item"><strong>Corporate</strong><div>& MSME</div></div>
+    <div class="trust-item">
+      <strong><span class="counter" data-target="10">0</span>+ Years</strong>
+      <div>Experience</div>
+    </div>
+
+    <div class="trust-item">
+      <strong><span class="counter" data-target="10000">0</span>+</strong>
+      <div>Shipments</div>
+    </div>
+
+    <div class="trust-item">
+      <strong>Pan‑India</strong>
+      <div>Network</div>
+    </div>
+
+    <div class="trust-item">
+      <strong>Corporate</strong>
+      <div>& MSME</div>
+    </div>
   </div>
 </section>
 
@@ -292,6 +660,10 @@ h2::after{
     <div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_sigsrgsigsrgsigs.png')"></div><div class="service-content"><div class="service-title">Time‑Bound</div><div class="service-desc">Guaranteed timelines</div></div></div>
     <div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_d44v45d44v45d44v.png')"></div><div class="service-content"><div class="service-title">International</div><div class="service-desc">Worldwide delivery</div></div></div>
     <div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_b76rb0b76rb0b76r.png')"></div><div class="service-content"><div class="service-title">Bulk Shipments</div><div class="service-desc">Large volumes</div></div></div>
+<div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_qz42g6qz42g6qz42.png')"></div><div class="service-content"><div class="service-title">COD Service</div><div class="service-desc">Cash On Delivery</div></div></div>
+    <div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_safklsafklsafkls.png')"></div><div class="service-content"><div class="service-title">E-commerce</div><div class="service-desc">Solution for E-commerce Needs</div></div></div>
+    <div class="service-card"><div class="bg-img" style="background-image:url('Gemini_Generated_Image_gg48zggg48zggg48.png')"></div><div class="service-content"><div class="service-title">Business Needs</div><div class="service-desc">Solution for Business Needs</div></div></div>
+
   </div>
 </section>
 
@@ -380,24 +752,47 @@ h2::after{
     <h2>Request a Quote</h2>
 
     <form id="quoteForm">
-      <input type="text" id="qName" placeholder="Name" required>
-      <input type="tel" id="qPhone" placeholder="Phone" required>
+  <input type="text" id="qName" placeholder="Name" required>
+  <input 
+  type="tel" 
+  id="qPhone" 
+  placeholder="10-Digit Phone Number" 
+  maxlength="10" 
+  oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+  required
+>
+  <input type="text" id="qPickupPincode" placeholder="Pickup Pincode" maxlength="6" required>
+  <input type="text" id="qDestinationPincode" placeholder="Destination Pincode" maxlength="6" required>
 
-      <input type="text" id="qPickupPincode" placeholder="Pickup Pincode" maxlength="6" required>
-      <input type="text" id="qDestinationPincode" placeholder="Destination Pincode" maxlength="6" required>
+  <input type="hidden" name="service_type" id="selectedService" value="Surface">
 
-      <select id="qMode" required>
-        <option value="">Select Mode</option>
-        <option value="Surface">Surface</option>
-        <option value="Air">Air</option>
-      </select>
+  <div class="service-selection-grid">
+    <div class="service-card active" onclick="selectService('Surface', this)">
+      <div class="icon">🚛</div>
+      <h3>Surface</h3>
+      <p style="font-size: 12px; color: #666;">Economical</p>
+    </div>
+    
+    <div class="service-card" onclick="selectService('Air', this)">
+      <div class="badge">Fastest</div>
+      <div class="icon">✈️</div>
+      <h3>Air Courier</h3>
+      <p style="font-size: 12px; color: #666;">Priority</p>
+    </div>
+  </div>      
 
-      <input type="number" id="qWeight" placeholder="Weight (kg)" step="0.1" required>
+ 
+<div class="form-group" style="margin-bottom: 20px;">
+  <label for="qWeight" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 600; color: #444;">
+    Shipment Weight (kg)
+    <span class="tooltip-icon" title="Shipping cost is calculated based on Actual weight or Volumetric weight, whichever is higher.">?</span>
+  </label>
+  <input type="number" id="qWeight" placeholder="e.g. 5.5" step="0.1" inputmode="decimal" required>
+</div>
 
-      <button type="submit">Submit</button>
-    </form>
+  <button type="submit" class="btn primary" style="width: 100%; cursor: pointer; border: none;">Submit</button>
+</form>    
 
-    <!-- success message -->
     <div id="quoteSuccess" style="display:none;text-align:center;margin-top:20px">
       <div style="width:70px;height:70px;border-radius:50%;border:4px solid #4caf50;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;position:relative;">
         <span style="width:14px;height:28px;border-right:5px solid #4caf50;border-bottom:5px solid #4caf50;transform:rotate(45deg);margin-top:-6px;display:block;"></span>
@@ -411,97 +806,221 @@ h2::after{
 <section class="section">
   <h2>Frequently Asked Questions</h2>
   <div style="max-width:800px; margin:auto; text-align:left;">
-    <div style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+    <div class="faq-item" style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
       <strong style="color:#ff6a00;">Q: What is Volumetric Weight?</strong>
       <p style="margin-top:10px; font-size:14px;">It is a pricing method for large, light items based on dimensions rather than actual weight.</p>
     </div>
-    <div style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+    <div class="faq-item" style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
       <strong style="color:#ff6a00;">Q: Is my shipment insured?</strong>
       <p style="margin-top:10px; font-size:14px;">Yes, we provide risk cover to protect your valuable cargo during transit.</p>
     </div>
-    <div style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+    <div class="faq-item" style="background:#fff; padding:20px; border-radius:15px; margin-bottom:15px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
       <strong style="color:#ff6a00;">Q: How do I get my Tracking ID?</strong>
-     <p style="margin-top:10px; font-size:14px;">Once your order is picked up, we send the tracking number via SMS or email[.</p>
+     <p style="margin-top:10px; font-size:14px;">Once your order is picked up, we send the tracking number via SMS or email.</p>
     </div>
   </div>
 </section>
 
-<footer>
-  <p>Noida | 9999999999</p>
-  <p>© 2026 Aparna Enterprises</p>
+<section class="pan-india-clean">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="pan-india-title">Our Pan-India Reach</h2>
+      <div class="orange-dash"></div>
+    </div>
+    
+    <div class="stats-horizontal-bar">
+      <div class="stat-unit">
+        <span class="counter" data-target="19000">0</span>
+        <p>Pincodes Serving</p>
+      </div>
+      <div class="stat-unit">
+        <span class="counter" data-target="500">0</span>
+        <p>Cities Nationwide</p>
+      </div>
+      <div class="stat-unit">
+        <span class="counter" data-target="250">0</span>
+        <p>Vehicles on Road</p>
+      </div>
+      <div class="stat-unit">
+        <span class="counter" data-target="24">0</span>
+        <p>Hour Tracking</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer 
+  class="main-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4 class="footer-heading">Aparna Enterprises</h4>
+      <p class="footer-text">Reliable Courier & Cargo solutions across India. Providing seamless logistics for Corporate and MSME sectors.</p>
+    </div>
+    
+    <div class="footer-column">
+      <h4 class="footer-heading">Contact Us</h4>
+      <p class="footer-text">
+        <strong>Location:</strong> Noida, Uttar Pradesh<br>
+        <strong>Phone:</strong> +91 9999999999<br>
+        <strong>Email:</strong> info@aparnaent.com
+      </p>
+    </div>
+    
+    <div class="footer-column">
+      <h4 class="footer-heading">Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#quote">Get a Quote</a></li>
+        <li><a href="#track">Track Shipment</a></li> <li><a href="#services">Our Services</a></li>
+        <li><a href="#about">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <hr class="footer-divider">
+    <p class="copyright-text">© 2026 Aparna Enterprises</p>
+  </div>
 </footer>
 
 <script>
- // 1. SELECT ELEMENTS
-  const quoteForm = document.getElementById('quoteForm'); // [cite: 33]
-  const quoteSuccess = document.getElementById('quoteSuccess'); // [cite: 33]
-  const pickup = document.getElementById('qPickupPincode'); // [cite: 33]
-  const dest = document.getElementById('qDestinationPincode'); // [cite: 33]
-  const submitBtn = quoteForm.querySelector('button');
+  // 1. SELECT ELEMENTS
+  const quoteForm = document.getElementById('quoteForm');
+  const quoteSuccess = document.getElementById('quoteSuccess');
+  const pickup = document.getElementById('qPickupPincode');
+  const dest = document.getElementById('qDestinationPincode');
+  const submitBtn = quoteForm ? quoteForm.querySelector('button') : null;
 
-  // 2. PINCODE VALIDATION (Restricts to 6 digits)
-  [pickup, dest].forEach(input => {
-    input.addEventListener('input', () => {
-      input.value = input.value.replace(/\D/g, '').slice(0, 6); // [cite: 33]
+  // 2. PINCODE VALIDATION
+  if (pickup && dest) {
+    [pickup, dest].forEach(input => {
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/\D/g, '').slice(0, 6);
+      });
     });
-  });
+  }
 
-  // 3. CONSOLIDATED SUBMIT HANDLER
-  quoteForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Prevent submission if pincodes are incomplete
-    if (pickup.value.length !== 6 || dest.value.length !== 6) {
-      alert("Please enter valid 6-digit pincodes.");
-      return;
+  // 3. SERVICE SELECTION LOGIC
+  function selectService(mode, element) {
+    const hiddenInput = document.getElementById('selectedService');
+    const preview = document.getElementById('estimatePreview');
+    
+    if (hiddenInput) { hiddenInput.value = mode; }
+    
+    // Option 3: Dynamic Estimate Update
+    if (preview) {
+      preview.innerText = (mode === 'Air') 
+        ? "Estimated Delivery: 24-48 Hours (Priority Air)" 
+        : "Estimated Delivery: 5-7 Business Days (Surface)";
     }
 
-    // Disable button to prevent double-firing
-    submitBtn.innerText = "Sending...";
-    submitBtn.disabled = true;
-
-    // Prepare data based on form IDs 
-    const payload = {
-      name: document.getElementById('qName').value,
-      phone: document.getElementById('qPhone').value,
-      pickupPincode: pickup.value,
-      destinationPincode: dest.value,
-      mode: document.getElementById('qMode').value,
-      weight: document.getElementById('qWeight').value
-    };
-
-    // 4. GOOGLE SHEETS INTEGRATION
-    fetch("https://script.google.com/macros/s/AKfycbyEOtIPr31g0fnCiXyrf80eh4d8zBXXZbC_7L9ZaZANwY7jEAqNSotGG7WGtMTRBvwigQ/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
-    .then(() => {
-      // Success feedback [cite: 34, 37]
-      quoteForm.style.display = "none";
-      quoteSuccess.style.display = "block";
-    })
-    .catch(err => {
-      console.error("Sheet error", err);
-      alert("Submission failed. Please try again.");
-      submitBtn.innerText = "Submit";
-      submitBtn.disabled = false;
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.classList.remove('active');
     });
-  });
+    element.classList.add('active');
+  }
 
-  // 5. VISUAL EFFECTS (Scroll Reveal)
-  const revealEls = document.querySelectorAll('.section, .service-card, .why-card, .trust-bar'); // [cite: 35]
-  const revealOnScroll = () => {
-    revealEls.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if(rect.top < window.innerHeight * 0.85){
-        el.classList.add('reveal'); // [cite: 36]
+  // 4. INSTANT FORM SUBMIT HANDLER
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (pickup.value.length !== 6 || dest.value.length !== 6) {
+        alert("Please enter valid 6-digit pincodes.");
+        return;
+      }
+
+      const payload = {
+        name: document.getElementById('qName').value,
+        phone: document.getElementById('qPhone').value,
+        pickupPincode: pickup.value,
+        destinationPincode: dest.value,
+        mode: document.getElementById('selectedService').value, 
+        weight: document.getElementById('qWeight').value
+      };
+
+      // IMMEDIATE FEEDBACK (No 15-second wait)
+      if (submitBtn) {
+        submitBtn.innerText = "✓ Submitted";
+        submitBtn.style.background = "#4caf50";
+        submitBtn.disabled = true;
+      }
+
+      setTimeout(() => {
+        quoteForm.style.display = "none";
+        quoteSuccess.style.display = "block";
+      }, 200);
+
+      // BACKGROUND SYNC
+      fetch("https://script.google.com/macros/s/AKfycbyEOtIPr31g0fnCiXyrf80eh4d8zBXXZbC_7L9ZaZANwY7jEAqNSotGG7WGtMTRBvwigQ/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Data send error:", err));
+    });
+  }
+
+  // 5. COUNTER & REVEAL LOGIC
+  const counters = document.querySelectorAll('.counter');
+  const animateCounter = (counter) => {
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const duration = 2000; 
+    const increment = target / (2000 / 16);
+
+    const updateCount = () => {
+      count += increment;
+      if (count < target) {
+        counter.innerText = Math.ceil(count).toLocaleString();
+        requestAnimationFrame(updateCount);
+      } else {
+        counter.innerText = target.toLocaleString();
+      }
+    };
+    updateCount();
+  };
+
+  const obsOptions = { threshold: 0.2 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (entry.target.classList.contains('counter')) {
+          animateCounter(entry.target);
+        } else {
+          entry.target.classList.add('reveal');
+        }
+        observer.unobserve(entry.target);
       }
     });
-  };
-  window.addEventListener('scroll', revealOnScroll); // [cite: 36]
-  window.addEventListener('load', revealOnScroll); // [cite: 36]
+  }, obsOptions);
+
+  counters.forEach(c => observer.observe(c));
+  document.querySelectorAll('.section, .service-card, .why-card, .trust-bar').forEach(el => observer.observe(el));
+
+// 6. DYNAMIC HEADER LOGIC
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+// Ensure only numbers and max 10 digits in Phone field
+const phoneInput = document.getElementById('phone');
+
+phoneInput.addEventListener('keypress', function(e) {
+    // Only allow numbers (0-9)
+    if (e.which < 48 || e.which > 57) {
+        e.preventDefault();
+    }
+});
+
+phoneInput.addEventListener('input', function() {
+    // If user pastes content, remove non-numeric characters and limit to 10
+    this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);
+});
 
 </script>
 
